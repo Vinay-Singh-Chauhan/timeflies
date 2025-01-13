@@ -1,76 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TimeFlies</title>
-  <style>
-    body {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Time Flies</title>
+    <style>
+      body {
         color: #e0e0e0;
         box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #2e2e2e;
-    }
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #2e2e2e;
+      }
 
-    .loading-container {
+      .loading-container {
         display: block;
-      width: 80%;
-      max-width: 500px;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+        background-color: #c6bcbc;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
 
-    .loading-bar {
-      height: 20px;
-      width: 0;
-      background: linear-gradient(90deg, #4caf50, #81c784);
-      animation: load 3s ease-in-out forwards;
-    }
+      .loading-bar {
+        height: 20px;
+        width: 0;
+        background: linear-gradient(90deg, #4caf50, #81c784);
+        animation: load 3s ease-in-out forwards;
+      }
 
-    
-
-    .status-text {
+      .cal_text {
         display: block;
-      text-align: center;
-      padding: 10px;
-      font-size: 16px;
-    }
-    
-    
-  </style>
-</head>
-<body>
-    <div class="status-text" id="calendar"></div>
-<div class="loading-container">
-    
-  <div class="loading-bar" id="loadingBar"></div>
-  
-</div>
-<div class="status-text" id="statusText">Loading...</div>
-<script>
-  const curr_date = new Date();
-  const calendar = document.getElementById("calendar");
-  const loadingBar = document.getElementById('loadingBar');
-  const statusText = document.getElementById('statusText');
+        text-align: center;
+        font-size: 16px;
+      }
+      .status-text {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cal_text" id="calendar"></div>
+    <div class="cal_text" id="clock"></div>
+    <div class="loading-container">
+      <div class="loading-bar" id="loadingBar"></div>
+    </div>
+    <div class="status-text" id="statusText">Loading...</div>
+    <script>
+      setInterval(()=>{
 
-  calendar.innerHTML = `<h2>${curr_date.toDateString()}</h2>`
-  let curr_year = Date.UTC(curr_date.getFullYear(),0,1,0,0,0,0);
-  let next_year = Date.UTC(curr_date.getFullYear()+1,0,1,0,0,0,0);
-  let today = Date.now();
-  // Simulating the loading progress
-  let progress = ((today-curr_year)*100)/(next_year-curr_year);
-  loadingBar.style.width = progress + '%';
-  // loadingBar.style.setProperty(width,progress+"%")
-  statusText.textContent = progress.toPrecision(2) +'% of year ' + curr_date.getFullYear().toString() + ' is now completed!';
-  
-</script>
+        const curr_date = new Date();
+      const calendar = document.getElementById("calendar");
+      const clock = document.getElementById("clock");
+      const loadingBar = document.getElementById("loadingBar");
+      const statusText = document.getElementById("statusText");
 
-</body>
+      calendar.innerHTML = `<h2>${curr_date.toDateString()}</h2>`;
+      clock.innerHTML = `<h4>${curr_date.toLocaleTimeString()}</h4>`;
+      let curr_year = Date.UTC(curr_date.getFullYear(), 0, 1, 0, 0, 0, 0);
+      let next_year = Date.UTC(curr_date.getFullYear() + 1, 0, 1, 0, 0, 0, 0);
+      let today = Date.now();
+      // Simulating the loading progress
+      let progress = ((today - curr_year) * 100) / (next_year - curr_year);
+      loadingBar.style.width = progress + "%";
+      // loadingBar.style.setProperty(width,progress+"%")
+      statusText.textContent =
+        progress.toPrecision(2) +
+        "% of year " +
+        curr_date.getFullYear().toString() +
+        " is now complete!";
+      },
+      1000)
+      
+    </script>
+  </body>
 </html>
