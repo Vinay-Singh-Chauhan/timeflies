@@ -39,6 +39,7 @@ module.exports = {
           name: 'timeflies'
         },
         prerelease: false,
+        generateReleaseNotes:true,
         draft: true
       }
     }
