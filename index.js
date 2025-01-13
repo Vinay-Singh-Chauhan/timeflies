@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron/main')
 if (require('electron-squirrel-startup')) app.quit();
+require('update-electron-app')()
 const createWindow = () => {
   const win = new BrowserWindow({
     // frame:false,
@@ -12,8 +13,7 @@ const createWindow = () => {
     closable:false,
     resizable:false,
     maximizable:false,
-    // x:0,
-    // y:0,
+    tabbingIdentifier:"timeflies-window-14554215421",
     
     skipTaskbar:true,
     icon:"./assets/favicon.ico",
@@ -25,7 +25,9 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
-   createWindow()
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow()
+  }
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
